@@ -15,20 +15,18 @@ server.use(express.static(__dirname+'/public'));
 // This can be used to ex: to authenticate the request against database and if user is authoraised then only allow to use
 //order of custom middleware is very important, so this should be at the top for authentication of requests
 server.use((req, resp, next) => {
-    console.log(`${new Date().toString()} : ${req.method} ${req.url} `);
+    //console.log(`${new Date().toString()} : ${req.method} ${req.url} `);
 
-    resp.send(`Page is under maintainance!!!`);
+    //resp.send(`Page is under maintainance!!!`);
 
     // untill next() is called nothing will be executed. So during authentication of the request this will be very useful
     // if the user is auth then only allow him to fetch the desired response else send a custom response
-    //next();
+    next();
 });
 
 hbs.registerHelper('getCurrentYear', () => new Date().getFullYear() );
 
 hbs.registerHelper('toUpper', (str) => str.toUpperCase() );
-
-
 
 server.get('/', (req, resp) => {
     resp.render('index.html', {
